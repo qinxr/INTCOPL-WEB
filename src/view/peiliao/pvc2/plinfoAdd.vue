@@ -148,7 +148,7 @@
 						<Col span="2" offset="1" class="intro">操作员:</Col>
 						<Col span="5">
 						<Select v-model="data.restStartOperator" style="width:100%">
-							<i-option v-for="item in operator" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+							<i-option v-for="item in operator2" :value="item.value" :key="item.value">{{ item.label }}</i-option>
 						</Select>
 						</Col>
 					</Row>

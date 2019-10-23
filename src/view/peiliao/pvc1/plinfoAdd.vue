@@ -37,13 +37,13 @@
 						<Col span="3" class="intro">开始搅拌时间:</Col>
 						<Col span="4">
 						<FormItem prop="stirStartTime">
-							<DatePicker :value="data.stirStartTime" type="datetime" format="yyyy-MM-dd HH:mm" @on-change="data.stirStartTime=$event" placeholder="Select time" style="width: 100%"></DatePicker>
+							<DatePicker :value="data.stirStartTime" type="datetime" format="yyyy-MM-dd HH:mm" :editable='false' @on-change="data.stirStartTime=$event" placeholder="点击选择时间" style="width: 100%"></DatePicker>
 						</FormItem>
 						</Col>
 						<Col span="3" offset="1" class="intro">结束搅拌时间:</Col>
 						<Col span="4">
 						<FormItem prop="stirEndTime">
-							<DatePicker :value="data.stirEndTime" type="datetime" format="yyyy-MM-dd HH:mm" @on-change="data.stirEndTime=$event" placeholder="Select time" style="width: 100%"></DatePicker>
+							<DatePicker :value="data.stirEndTime" type="datetime" format="yyyy-MM-dd HH:mm" :editable='false' @on-change="data.stirEndTime=$event" placeholder="点击选择时间" style="width: 100%"></DatePicker>
 						</FormItem>
 						</Col>
 						<Col span="2" offset="1" class="intro">批号:</Col>
@@ -79,8 +79,9 @@
 						</Col>
 					</Row>
 					<Row class="top">
-
-						<Table :columns="columns" :data="data.ylData" style="overflow: inherit;"></Table>
+            <Col span="24">
+						<Table :columns="columns" :data="data.ylData" style="overflow: inherit; width: 100%;"></Table>
+             </Col>
 					</Row>
 					<Row class="top">
 						<Col span="2" class="intro">投放总量（kg):</Col>
@@ -121,7 +122,7 @@
 							<tr>
 								<td style="width:13%;">检测时间:</td>
 								<td v-for='item in data.detTime'>
-									<TimePicker confirm :value="item.dettime" format="HH:mm" @on-change="item.dettime=$event" placeholder="Select time" style="width: 100%"></TimePicker>
+									<TimePicker confirm :value="item.dettime" format="HH:mm" @on-change="item.dettime=$event" placeholder="检测时间" style="width: 100%"></TimePicker>
 								</td>
 							</tr>
 							<tr>
@@ -139,7 +140,7 @@
 					<Row>
 						<Col span="2" class="intro">开始静置时间:</Col>
 						<Col span="5">
-						<DatePicker type="datetime" format="yyyy-MM-dd HH:mm" :value="data.restStartTime" @on-change="data.restStartTime=$event" placeholder="Select time" style="width: 100%"></DatePicker>
+						<DatePicker type="datetime" format="yyyy-MM-dd HH:mm" :value="data.restStartTime" @on-change="data.restStartTime=$event" placeholder="点击选择时间" style="width: 100%"></DatePicker>
 						</Col>
 						<Col span="2" offset="1" class="intro">开始静置温度:</Col>
 						<Col span="5">
@@ -148,14 +149,14 @@
 						<Col span="2" offset="1" class="intro">操作员:</Col>
 						<Col span="5">
 						<Select v-model="data.restStartOperator" style="width:100%">
-							<i-option v-for="item in operator" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+							<i-option v-for="item in operator2" :value="item.value" :key="item.value">{{ item.label }}</i-option>
 						</Select>
 						</Col>
 					</Row>
 					<Row class="top">
 						<Col span="2" class="intro">结束静置时间:</Col>
 						<Col span="5">
-						<DatePicker type="datetime" format="yyyy-MM-dd HH:mm" :value="data.restEndTime" @on-change="data.restEndTime=$event" placeholder="结束静置时间" style="width: 100%"></DatePicker>
+						<DatePicker type="datetime" format="yyyy-MM-dd HH:mm" :value="data.restEndTime" @on-change="data.restEndTime=$event" placeholder="点击选择时间" style="width: 100%"></DatePicker>
 						</Col>
 						<Col span="2" offset="1" class="intro">班次:</Col>
 						<Col span="5">
@@ -355,7 +356,7 @@
 				columns: [{
 						title: '原料名称',
 						key: 'rawName',
-						width: 150,
+						minWidth: 120,
 						render: (h, params) => {
 							return h('Select', {
 								props: {
@@ -445,6 +446,7 @@
 					{
 						title: '批号',
 						key: 'lotNumber',
+            minWidth: 100,
 						render: (h, params) => {
 							return h('Input', {
 								props: {
@@ -461,7 +463,7 @@
 					{
 						title: '投放时间',
 						key: 'startTime',
-						width: 150,
+						minWidth: 150,
 						render: (h, params) => {
 							return h('Date-picker', {
 								props: {
@@ -481,7 +483,7 @@
 					{
 						title: '结束时间',
 						key: 'endTime',
-						width: 150,
+						minWidth: 150,
 						render: (h, params) => {
 							return h('Date-picker', {
 								props: {
@@ -501,6 +503,7 @@
 					{
 						title: '投放数量',
 						key: 'deliveryCount',
+            minWidth: 50,
 						render: (h, params) => {
 							return h('Input', {
 								props: {
@@ -519,6 +522,7 @@
 					{
 						title: '配料员',
 						key: 'formulator',
+            minWidth: 120,
 						render: (h, params) => {
 							if(parseInt(this.data.ylData[params.row._index].rawName) >= 9) {
 								switch(this.data.shift) {
@@ -708,7 +712,7 @@
 					{
 						title: '复核人',
 						key: 'reviewer',
-						width: 150,
+						minWidth: 150,
 						render: (h, params) => {
 							return h('Select', {
 								props: {
@@ -1077,7 +1081,7 @@
 		font-size: 14px;
 		font-weight: 600;
 	}
-	
+
 	.top {
 		margin: 15px 0;
 	}

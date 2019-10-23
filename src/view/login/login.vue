@@ -27,7 +27,7 @@
 				'handleLogin',
 				'getUserInfo'
 			]),
-			handleSubmit({
+			handleSubmit ({
 				userName,
 				password
 			}) {
@@ -40,7 +40,7 @@
 
 						if(userName == 'intco_admin' && password == 'intco') {
 							this.$router.push({
-								name: 'home'
+								name: this.$config.homeName
 							})
 						} else {
 							this.$Message.error("账号或密码错误");
