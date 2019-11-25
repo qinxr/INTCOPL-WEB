@@ -30,12 +30,12 @@
 					<Col span="3" class="intro">开始搅拌时间:</Col>
 					<Col span="4">
 							<DatePicker  :value='data.stirStartTime' type="datetime" format="yyyy-MM-dd HH:mm" @on-change="data.stirStartTime=$event" placeholder="Select time" style="width: 100%"></DatePicker>
-					
+
 					</Col>
 					<Col span="3" offset="1" class="intro">结束搅拌时间:</Col>
 					<Col span="4">
 							<DatePicker  :value='data.stirEndTime' type="datetime" format="yyyy-MM-dd HH:mm" @on-change="data.stirEndTime=$event" placeholder="Select time" style="width: 100%"></DatePicker>
-					
+
 					</Col>
 					<Col span="2" offset="1" class="intro">批号:</Col>
 					<Col span="5">
@@ -93,7 +93,7 @@
 							<tr>
 								<td style="width:13%;">检测时间:</td>
 								<td v-for='item in data.detTime'>
-									<TimePicker confirm :value="item.dettime" format="HH:mm" @on-change="item.dettime=$event" placeholder="Select time" style="width: 100%"></TimePicker>
+									<TimePicker :value="item.detTime"  format="HH:mm" @on-change="item.detTime=$event" placeholder="Select time" style="width: 100%"></TimePicker>
 								</td>
 							</tr>
 							<tr>
@@ -197,25 +197,25 @@
 						reviewer: '',
 					},
 					detTime: [{ //检测时间和检测温度
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, ],
 					restStartTime: '', //开始静置时间
@@ -543,7 +543,7 @@
 		},
 
 		watch: {
-			
+
 			'data.ylData': {
 				handler(newVal, oldVal) {
 					var a = this.data.ylData.length;
@@ -565,7 +565,8 @@
 			//监测检测数据变化自动生成时间
 			'data.detTime': {
 				handler(newVal, oldVal) {
-					this.changeTime(this.data.detTime[0].dettime);
+
+					this.changeTime(this.data.detTime[0].detTime);
 				},
 				deep: true
 			},
@@ -679,7 +680,7 @@
 //					copy.data.ylData = response.data.data[1];
 //					copy.data.detTime = response.data.data[2];
 //					copy.data.recipe = copy.data.lotNumber.slice(0, 2);
-					
+
 					var allData='';
 					allData = response.data.data[0];
 					allData.ylData = response.data.data[1];
@@ -710,7 +711,7 @@
 				var hour = parseInt(time.slice(0, 2)) * 60;
 				var minute = parseInt(time.slice(3, 5));
 				var all = hour + minute;
-				for(var i = 0; i < 6; i++) {
+				for(var i = 0; i < this.data.detTime.length - 1; i++) {
 					all = all + 30;
 					var newhour = (Math.floor(all / 60)).toString().length < 2 ? "0" + (Math.floor(all / 60)).toString() : (Math.floor(all / 60)).toString();
 					var newMinute = (all % 60).toString().length < 2 ? "0" + (all % 60).toString() : (all % 60).toString();
@@ -719,7 +720,8 @@
 					} else {
 
 					}
-					this.data.detTime[i + 1].dettime = newhour + ':' + newMinute;
+          console.log(newhour + ':' + newMinute)
+					this.data.detTime[i + 1].detTime = newhour + ':' + newMinute;
 				}
 			},
 			changePeople(data, arr) {
@@ -785,7 +787,7 @@
 		font-size: 14px;
 		font-weight: 600;
 	}
-	
+
 	.top {
 		margin: 15px 0;
 	}

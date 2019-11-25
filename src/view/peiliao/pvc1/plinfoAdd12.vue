@@ -262,7 +262,7 @@
 					mixerNumber: '', //搅拌机号
 					formulator: '', //配料员
 					totalCount: '', //混合料重量
-					rotateSpeed: '1100', //搅拌机转速
+					rotateSpeed: '900', //搅拌机转速
 					totalTime: '', //新料静置时间
 					stirStartTime: '', //搅拌开始时间
 					stirEndTime: '', //搅拌结束时间
@@ -938,7 +938,7 @@
 				axios.post(copy.pub.url + '/pladmin/getPlAsId/' + index)
 					.then(function(response) {
 
-						copy.data.totalTime = response.data.data[0].totalTime;
+						copy.data.totalTime = response.data.data[0].restTotalTime;
 						copy.data.outputNumber = response.data.data[0].restTankNumber;
 
 					})
@@ -1035,7 +1035,7 @@
 		font-size: 14px;
 		font-weight: 600;
 	}
-	
+
 	.top {
 		margin: 15px 0;
 	}

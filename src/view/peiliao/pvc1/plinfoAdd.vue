@@ -122,7 +122,7 @@
 							<tr>
 								<td style="width:13%;">检测时间:</td>
 								<td v-for='item in data.detTime'>
-									<TimePicker confirm :value="item.dettime" format="HH:mm" @on-change="item.dettime=$event" placeholder="检测时间" style="width: 100%"></TimePicker>
+									<TimePicker  :value="item.dettime" format="HH:mm" @on-change="item.dettime=$event" placeholder="检测时间" style="width: 100%"></TimePicker>
 								</td>
 							</tr>
 							<tr>
@@ -864,6 +864,8 @@
 			'data.detTime': {
 				handler(newVal, oldVal) {
 					this.changeTime(this.data.detTime[0].dettime);
+          this.data.restStartTime=this.data.formDate+' '+this.data.detTime[6].dettime;
+          console.log(this.data.restStartTime)
 				},
 				deep: true
 			},
