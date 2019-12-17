@@ -203,7 +203,7 @@
 					recipe: '01',
 					formDate: '', //日期
 					shift: '', //班次
-					factory: '1', //厂区
+					factory: '2', //厂区
 					stirStartTime: '', //搅拌开始时间
 					stirEndTime: '', //搅拌结束时间
 					lotNumber: '', //批号
@@ -294,7 +294,10 @@
 					}, {
 						dettime: '',
 						detTemperature: ''
-					}, ],
+					},{
+						dettime: '',
+						detTemperature: ''
+					}],
 					restStartTime: '', //开始静置时间
 					restTemperature: '', //开始静置温度
 					restStartOperator: '', //开始静置操作员
@@ -777,18 +780,12 @@
 						label: 'C班'
 					},
 				],
-				factory: [{
-						value: '1',
-						label: 'PVC一厂'
-					},
+				factory: [
 					{
 						value: '2',
 						label: 'PVC二厂'
 					},
-					{
-						value: '3',
-						label: 'PVC三厂'
-					},
+
 
 				],
 				mixerNumber: [{
@@ -875,7 +872,7 @@
 					for(var i = 0; i < a; i++) {
 						if(this.data.ylData[i].deliveryCount != '') {
 
-							this.data.tolCount.push(parseInt(this.data.ylData[i].deliveryCount))
+							this.data.tolCount.push(parseFloat(this.data.ylData[i].deliveryCount))
 						}
 					}
 					console.log(this.data.tolCount)
@@ -891,6 +888,9 @@
 			'data.detTime': {
 				handler(newVal, oldVal) {
 					this.changeTime(this.data.detTime[0].dettime);
+          this.data.restStartTime = this.data.formDate + ' ' + this.data.detTime[7].dettime;
+          this.data.restTemperature =  this.data.detTime[7].detTemperature;
+          console.log(this.data.restStartTime)
 				},
 				deep: true
 			},
@@ -1108,7 +1108,7 @@
 		font-size: 14px;
 		font-weight: 600;
 	}
-	
+
 	.top {
 		margin: 15px 0;
 	}

@@ -120,7 +120,7 @@
 						<Col span="2" offset="1" class="intro">操作员:</Col>
 						<Col span="5">
 						<Select v-model="data.restStartOperator" style="width:100%">
-							<i-option v-for="item in operator" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+							<i-option v-for="item in inspectors" :value="item.value" :key="item.value">{{ item.label }}</i-option>
 						</Select>
 						</Col>
 					</Row>
@@ -138,7 +138,7 @@
 						<Col span="2" offset="1" class="intro">操作员:</Col>
 						<Col span="5">
 						<Select v-model="data.restEndOperator" style="width:100%">
-							<i-option v-for="item in operator2" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+							<i-option v-for="item in inspectors" :value="item.value" :key="item.value">{{ item.label }}</i-option>
 						</Select>
 						</Col>
 					</Row>
@@ -399,18 +399,68 @@
 						title: '配料员',
 						key: 'formulator',
 						render: (h, params) => {
-							return h('Input', {
-								props: {
-									placeholder: '配料员',
-									value: this.data.ylData[params.row._index].formulator
-								},
-								on: {
-									input: (event) => {
-										console.log(event)
-										this.data.ylData[params.row._index].formulator = event
-									}
-								},
-							}, );
+							return h('Select', {
+							  props: {
+							    placeholder: '配料员',
+							    value: this.data.ylData[params.row._index].formulator
+							  },
+							  on: {
+							    'on-change': (event) => {
+							      this.data.ylData[params.row._index].formulator = event
+							    }
+							  },
+							}, [
+							  h('Option', {
+							    props: {
+							      value: '关庆森 '
+							    }
+							  }, '关庆森 '),
+							  h('Option', {
+							    props: {
+							      value: '李海亮'
+							    }
+							  }, '李海亮'),
+							  h('Option', {
+							    props: {
+							      value: '孟祥东'
+							    }
+							  }, '孟祥东'),
+							  h('Option', {
+							    props: {
+							      value: '王明川'
+							    }
+							  }, '王明川'),
+							  h('Option', {
+							    props: {
+							      value: '杜浩哲'
+							    }
+							  }, '杜浩哲'),
+							  h('Option', {
+							    props: {
+							      value: '李全禄'
+							    }
+							  }, '李全禄'),
+							  h('Option', {
+							    props: {
+							      value: '徐云山'
+							    }
+							  }, '徐云山'),
+							  h('Option', {
+							    props: {
+							      value: '孟庆寅'
+							    }
+							  }, '孟庆寅'),
+							  h('Option', {
+							    props: {
+							      value: '张立亮'
+							    }
+							  }, '张立亮'),
+							  h('Option', {
+							    props: {
+							      value: '马际安'
+							    }
+							  }, '马际安'),
+							]);
 						}
 					},
 					{
@@ -430,11 +480,20 @@
 								},
 							}, [
 								h('Option', {
-									props: {
-										value: this.data.reviewman
-									}
-								}, this.data.reviewman),
-
+								  props: {
+								    value: '关庆森'
+								  }
+								}, '关庆森'),
+								h('Option', {
+								  props: {
+								    value: '王明川'
+								  }
+								}, '王明川 '),
+								h('Option', {
+								  props: {
+								    value: '徐云山'
+								  }
+								}, '徐云山 '),
 							]);
 						}
 
@@ -497,47 +556,71 @@
 
 				],
 				inspectors: [{
-						value: '1',
-						label: ''
-					},
-					{
-						value: '2',
-						label: ''
-					},
-					{
-						value: '3',
-						label: ''
-					},
+				    value: '关庆森',
+				    label: '关庆森'
+				  },
+				  {
+				    value: '李海亮',
+				    label: '李海亮'
+				  },
+				  {
+				    value: '孟祥东',
+				    label: '孟祥东'
+				  },
+				  {
+				    value: '王明川',
+				    label: '王明川'
+				  },{
+				    value: '杜浩哲',
+				    label: '杜浩哲'
+				  },{
+				    value: '李全禄',
+				    label: '李全禄'
+				  },{
+				    value: '徐云山',
+				    label: '徐云山'
+				  },{
+				    value: '孟庆寅',
+				    label: '孟庆寅'
+				  },{
+				    value: '张立亮',
+				    label: '张立亮'
+				  },{
+				    value: '马际安',
+				    label: '马际安'
+				  }
 
 				],
 				operator: [{
-						value: '1',
-						label: ''
-					},
-					{
-						value: '2',
-						label: ''
-					},
-					{
-						value: '3',
-						label: ''
-					},
+				    value: '关庆森',
+				    label: '关庆森'
+				  },
+				  {
+				    value: '王明川',
+				    label: '王明川'
+				  },
+				  {
+				    value: '徐云山',
+				    label: '徐云山'
+				  },
 
 				],
-				operator2: [{
-						value: '1',
-						label: ''
-					},
-					{
-						value: '2',
-						label: ''
-					},
-					{
-						value: '3',
-						label: ''
-					},
 
-				],
+				// ],
+				// operator2: [{
+				// 		value: '1',
+				// 		label: ''
+				// 	},
+				// 	{
+				// 		value: '2',
+				// 		label: ''
+				// 	},
+				// 	{
+				// 		value: '3',
+				// 		label: ''
+				// 	},
+
+				// ],
 
 			}
 		},
@@ -551,9 +634,10 @@
 					for(var i = 0; i < a; i++) {
 						if(this.data.ylData[i].deliveryCount != '') {
 
-							this.data.tolCount.push(parseInt(this.data.ylData[i].deliveryCount))
+							this.data.tolCount.push(parseFloat(this.data.ylData[i].deliveryCount))
 						}
 					}
+            console.log(this.data.tolCount)
 					var result = 0;
 					for(var i = 0; i < this.data.tolCount.length; i++) {
 						result += this.data.tolCount[i];
@@ -596,56 +680,56 @@
 				},
 				deep: true
 			},
-			'data.shift': {
-				handler(newVal, oldVal) {
-					this.getNumber();
-					switch(newVal) {
-						case 'A':
-							this.data.reviewman = '关庆森';
-							var a = ['李海亮', '关庆森', '孟祥东', '杜浩哲', '马际安'];
-							this.changePeople(this.operator, a);
-							this.changePeople(this.inspectors, a);
-							break;
-						case 'B':
-							this.data.reviewman = '王明川';
-							var b = ['刘彬', '李全禄', '王明川', '杜浩哲', '马际安'];
-							this.changePeople(this.operator, b);
-							this.changePeople(this.inspectors, b);
-							break;
-						case 'C':
-							this.data.reviewman = '徐云山';
-							var c = ['孟庆寅', '张立亮', '徐云山', '杜浩哲', '马际安'];
-							this.changePeople(this.operator, c);
-							this.changePeople(this.inspectors, c);
-							break;
-						default:
-							break;
-					}
-				},
-				deep: true
-			},
-			'data.restShift': {
-				handler(newVal, oldVal) {
-					this.getNumber();
-					switch(newVal) {
-						case 'A':
-							var a = ['李海亮', '关庆森', '杜浩哲'];
-							this.changePeople(this.operator2, a);
-							break;
-						case 'B':
-							var b = ['刘彬', '王明川', '杜浩哲'];
-							this.changePeople(this.operator2, b);
-							break;
-						case 'C':
-							var c = ['孟庆寅', '徐云山', '杜浩哲'];
-							this.changePeople(this.operator2, c);
-							break;
-						default:
-							break;
-					}
-				},
-				deep: true
-			},
+			// 'data.shift': {
+			// 	handler(newVal, oldVal) {
+			// 		this.getNumber();
+			// 		switch(newVal) {
+			// 			case 'A':
+			// 				this.data.reviewman = '关庆森';
+			// 				var a = ['李海亮', '关庆森', '孟祥东', '杜浩哲', '马际安'];
+			// 				this.changePeople(this.operator, a);
+			// 				this.changePeople(this.inspectors, a);
+			// 				break;
+			// 			case 'B':
+			// 				this.data.reviewman = '王明川';
+			// 				var b = ['刘彬', '李全禄', '王明川', '杜浩哲', '马际安'];
+			// 				this.changePeople(this.operator, b);
+			// 				this.changePeople(this.inspectors, b);
+			// 				break;
+			// 			case 'C':
+			// 				this.data.reviewman = '徐云山';
+			// 				var c = ['孟庆寅', '张立亮', '徐云山', '杜浩哲', '马际安'];
+			// 				this.changePeople(this.operator, c);
+			// 				this.changePeople(this.inspectors, c);
+			// 				break;
+			// 			default:
+			// 				break;
+			// 		}
+			// 	},
+			// 	deep: true
+			// },
+			// 'data.restShift': {
+			// 	handler(newVal, oldVal) {
+			// 		this.getNumber();
+			// 		switch(newVal) {
+			// 			case 'A':
+			// 				var a = ['李海亮', '关庆森', '杜浩哲'];
+			// 				this.changePeople(this.operator2, a);
+			// 				break;
+			// 			case 'B':
+			// 				var b = ['刘彬', '王明川', '杜浩哲'];
+			// 				this.changePeople(this.operator2, b);
+			// 				break;
+			// 			case 'C':
+			// 				var c = ['孟庆寅', '徐云山', '杜浩哲'];
+			// 				this.changePeople(this.operator2, c);
+			// 				break;
+			// 			default:
+			// 				break;
+			// 		}
+			// 	},
+			// 	deep: true
+			// },
 			'data.factory': {
 				handler(newVal, oldVal) {
 					this.getNumber()
@@ -681,12 +765,58 @@
 //					copy.data.detTime = response.data.data[2];
 //					copy.data.recipe = copy.data.lotNumber.slice(0, 2);
 
-					var allData='';
-					allData = response.data.data[0];
-					allData.ylData = response.data.data[1];
-					allData.detTime = response.data.data[2];
-					allData.recipe = allData.lotNumber.slice(0, 2);
-					copy.data=allData;
+					// var allData='';
+					// allData = response.data.data[0];
+					// allData.ylData = response.data.data[1];
+					// allData.detTime = response.data.data[2];
+					// allData.recipe = allData.lotNumber.slice(0, 2);
+					// copy.data=allData;
+
+          var allData='';
+          allData = response.data.data[0];
+          allData.recipe = allData.lotNumber.slice(0, 2);
+          if (response.data.data[1].length!=0) {
+          allData.ylData = response.data.data[1];
+          }else{
+            allData.ylData=[{
+              rawName: '',
+              lotNumber: '',
+              startTime: '',
+              endTime: '',
+              deliveryCount: '',
+              formulator: '',
+              reviewer: '',
+            }]
+          }
+          if (response.data.data[2].length!=0) {
+          allData.detTime = response.data.data[2];
+          }else{
+            allData.detTime=[{ //检测时间和检测温度
+          	dettime: '',
+          	detTemperature: ''
+          }, {
+          	dettime: '',
+          	detTemperature: ''
+          }, {
+          	dettime: '',
+          	detTemperature: ''
+          }, {
+          	dettime: '',
+          	detTemperature: ''
+          }, {
+          	dettime: '',
+          	detTemperature: ''
+          }, {
+          	dettime: '',
+          	detTemperature: ''
+          }, {
+          	dettime: '',
+          	detTemperature: ''
+          }, ]
+          }
+
+          allData.recipe = allData.lotNumber.slice(0, 2);
+             copy.data=allData;
 
 				})
 				.catch(function(error) {
@@ -774,8 +904,15 @@
 					.catch(function(error) {});
 			},
 			addRow() {
-				var row = this.data.rowData;
-				this.data.ylData.push(row)
+				this.data.ylData.push({
+				  rawName: '',
+				  lotNumber: '',
+				  startTime: '',
+				  endTime: '',
+				  deliveryCount: '',
+				  formulator: '',
+				  reviewer: '',
+				});
 			},
 		}
 

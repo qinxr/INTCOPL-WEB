@@ -227,7 +227,7 @@
 					<Col span="3">
 					<Input v-model="data.outputLine" style="width: 100%" />
 					</Col>
-					<Col span="2" offset="1" class="intro">排污人员:</Col>
+					<!-- <Col span="2" offset="1" class="intro">排污人员:</Col>
 					<Col span="3">
 					<Select v-model="data.polOperator" style="width:100%">
 						<i-option v-for="item in inspectors" :value="item.value" :key="item.value">{{ item.label }}</i-option>
@@ -236,7 +236,15 @@
 					<Col span="2" offset="1" class="intro">排污时间:</Col>
 					<Col span="3">
 					<DatePicker :value="data.polTime" type="datetime" format="yyyy-MM-dd HH:mm" @on-change="data.polTime=$event" placeholder="Select time" style="width: 100%"></DatePicker>
-					</Col>
+					</Col> -->
+          <Col span="2" offset="1" class="intro">高低料:</Col>
+          <Col span="2" offset="1" class="intro">{{data.cpsFlag}}</Col>
+          <Col span="2" offset="1" class="intro">带班长:</Col>
+          <Col span="4">
+          <Select v-model="data.outputReviewer" style="width:100%">
+          	<i-option v-for="item in operator" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+          </Select>
+          </Col>
 				</Row>
 				<Row class="top">
 					<Col span="2" class="intro">输入开始时间:</Col>
@@ -260,7 +268,7 @@
 					</Select>
 					</Col>
 				</Row>
-				<Row class="top">
+				<!-- <Row class="top">
 					<Col span="2" class="intro">检验员:</Col>
 					<Col span="3">
 					<Select v-model="data.outputInspector" style="width:100%">
@@ -278,7 +286,7 @@
 						<i-option v-for="item in inspectors" :value="item.value" :key="item.value">{{ item.label }}</i-option>
 					</Select>
 					</Col>
-				</Row>
+				</Row> -->
 
 			</Card>
 		</Card>
@@ -847,9 +855,9 @@
 					var a = this.data.ylData.length;
 					this.data.tolCount = [];
 					for(var i = 0; i < a; i++) {
-						if(this.data.ylData[i].deliveryCount != '') {
+						if(this.data.ylData[i].deliveryCount != null) {
 
-							this.data.tolCount.push(parseInt(this.data.ylData[i].deliveryCount))
+							this.data.tolCount.push(parseFloat(this.data.ylData[i].deliveryCount))
 						}
 					}
 					console.log(a)

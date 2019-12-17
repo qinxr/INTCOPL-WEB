@@ -30,12 +30,12 @@
 					<Col span="3" class="intro">开始搅拌时间:</Col>
 					<Col span="4">
 							<DatePicker  :value='data.stirStartTime' type="datetime" format="yyyy-MM-dd HH:mm" @on-change="data.stirStartTime=$event" placeholder="Select time" style="width: 100%"></DatePicker>
-					
+
 					</Col>
 					<Col span="3" offset="1" class="intro">结束搅拌时间:</Col>
 					<Col span="4">
 							<DatePicker  :value='data.stirEndTime' type="datetime" format="yyyy-MM-dd HH:mm" @on-change="data.stirEndTime=$event" placeholder="Select time" style="width: 100%"></DatePicker>
-					
+
 					</Col>
 					<Col span="2" offset="1" class="intro">批号:</Col>
 					<Col span="5">
@@ -93,7 +93,7 @@
 							<tr>
 								<td style="width:13%;">检测时间:</td>
 								<td v-for='item in data.detTime'>
-									<TimePicker confirm :value="item.dettime" format="HH:mm" @on-change="item.dettime=$event" placeholder="Select time" style="width: 100%"></TimePicker>
+									<TimePicker confirm :value="item.detTime" format="HH:mm" @on-change="item.dettime=$event" placeholder="Select time" style="width: 100%"></TimePicker>
 								</td>
 							</tr>
 							<tr>
@@ -119,9 +119,10 @@
 						</Col>
 						<Col span="2" offset="1" class="intro">操作员:</Col>
 						<Col span="5">
-						<Select v-model="data.restStartOperator" style="width:100%">
+              <Input v-model="data.restStartOperator" style="width: 100%" />
+						<!-- <Select v-model="data.restStartOperator" style="width:100%">
 							<i-option v-for="item in operator" :value="item.value" :key="item.value">{{ item.label }}</i-option>
-						</Select>
+						</Select> -->
 						</Col>
 					</Row>
 					<Row class="top">
@@ -555,15 +556,15 @@
 		},
 
 		watch: {
-			
+
 			'data.ylData': {
 				handler(newVal, oldVal) {
 					var a = this.data.ylData.length;
 					this.data.tolCount = [];
 					for(var i = 0; i < a; i++) {
-						if(this.data.ylData[i].deliveryCount != '') {
+						if(this.data.ylData[i].deliveryCount != null) {
 
-							this.data.tolCount.push(parseInt(this.data.ylData[i].deliveryCount))
+							this.data.tolCount.push(parseFloat(this.data.ylData[i].deliveryCount))
 						}
 					}
 					var result = 0;
@@ -687,11 +688,51 @@
 			axios.post(copy.pub.url + '/pladmin/getPlAsId/' + index)
 				.then(function(response) {
 
-					copy.data = response.data.data[0];
-					copy.data.ylData = response.data.data[1];
-					copy.data.detTime = response.data.data[2];
-					copy.data.recipe = copy.data.lotNumber.slice(0, 2);
-					
+					var allData='';
+					allData = response.data.data[0];
+					allData.recipe = allData.lotNumber.slice(0, 2);
+					if (response.data.data[1].length!=0) {
+					allData.ylData = response.data.data[1];
+					}else{
+					  allData.ylData=[{
+					    rawName: '',
+					    lotNumber: '',
+					    startTime: '',
+					    endTime: '',
+					    deliveryCount: '',
+					    formulator: '',
+					    reviewer: '',
+					  }]
+					}
+					if (response.data.data[2].length!=0) {
+					allData.detTime = response.data.data[2];
+					}else{
+					  allData.detTime=[{ //检测时间和检测温度
+						dettime: '',
+						detTemperature: ''
+					}, {
+						dettime: '',
+						detTemperature: ''
+					}, {
+						dettime: '',
+						detTemperature: ''
+					}, {
+						dettime: '',
+						detTemperature: ''
+					}, {
+						dettime: '',
+						detTemperature: ''
+					}, {
+						dettime: '',
+						detTemperature: ''
+					}, {
+						dettime: '',
+						detTemperature: ''
+					}, ]
+					}
+
+					allData.recipe = allData.lotNumber.slice(0, 2);
+					   copy.data=allData;
 
 				})
 				.catch(function(error) {
@@ -779,8 +820,15 @@
 					.catch(function(error) {});
 			},
 			addRow() {
-				var row = this.data.rowData;
-				this.data.ylData.push(row)
+				this.data.ylData.push({
+				  rawName: '',
+				  lotNumber: '',
+				  startTime: '',
+				  endTime: '',
+				  deliveryCount: '',
+				  formulator: '',
+				  reviewer: '',
+				});
 			},
 		}
 
@@ -792,7 +840,7 @@
 		font-size: 14px;
 		font-weight: 600;
 	}
-	
+
 	.top {
 		margin: 15px 0;
 	}

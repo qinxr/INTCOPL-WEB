@@ -186,7 +186,7 @@
 					<Col span="3">
 					<Input v-model="data.outputLine" style="width: 100%" />
 					</Col>
-					<Col span="2" offset="1" class="intro">排污人员:</Col>
+					<!-- <Col span="2" offset="1" class="intro">排污人员:</Col>
 					<Col span="3">
 					<Select v-model="data.polOperator" style="width:100%">
 						<i-option v-for="item in inspectors" :value="item.value" :key="item.value">{{ item.label }}</i-option>
@@ -195,7 +195,15 @@
 					<Col span="2" offset="1" class="intro">排污时间:</Col>
 					<Col span="3">
 					<DatePicker :value="data.polTime" type="datetime" format="yyyy-MM-dd HH:mm" @on-change="data.polTime=$event" placeholder="Select time" style="width: 100%"></DatePicker>
-					</Col>
+					</Col> -->
+          <Col span="2" offset="1" class="intro">高低料:</Col>
+          <Col span="2" offset="1" class="intro">{{data.cpsFlag}}</Col>
+          <Col span="2" offset="1" class="intro">带班长:</Col>
+          <Col span="4">
+          <Select v-model="data.outputReviewer" style="width:100%">
+          	<i-option v-for="item in operator" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+          </Select>
+          </Col>
 				</Row>
 				<Row class="top">
 					<Col span="2" class="intro">输入开始时间:</Col>
@@ -219,7 +227,7 @@
 					</Select>
 					</Col>
 				</Row>
-				<Row class="top">
+				<!-- <Row class="top">
 					<Col span="2" class="intro">检验员:</Col>
 					<Col span="3">
 					<Select v-model="data.outputInspector" style="width:100%">
@@ -237,7 +245,7 @@
 						<i-option v-for="item in inspectors" :value="item.value" :key="item.value">{{ item.label }}</i-option>
 					</Select>
 					</Col>
-				</Row>
+				</Row> -->
 
 			</Card>
 		</Card>
@@ -486,8 +494,6 @@
 						title: '配料员',
 						key: 'vacOperator',
 						render: (h, params) => {
-							switch(this.data.shift) {
-								case 'A':
 									return h('Select', {
 										props: {
 											placeholder: '配料员',
@@ -500,96 +506,58 @@
 										},
 									}, [
 										h('Option', {
-											props: {
-												value: '李海亮'
-											}
+										  props: {
+										    value: '关庆森 '
+										  }
+										}, '关庆森 '),
+										h('Option', {
+										  props: {
+										    value: '李海亮'
+										  }
 										}, '李海亮'),
 										h('Option', {
-											props: {
-												value: '关庆森'
-											}
-										}, '关庆森'),
+										  props: {
+										    value: '孟祥东'
+										  }
+										}, '孟祥东'),
 										h('Option', {
-											props: {
-												value: '杜浩哲'
-											}
-										}, '杜浩哲'),
-									]);
-									break;
-								case 'B':
-									return h('Select', {
-										props: {
-											placeholder: '配料员',
-											value: this.data.vacData[params.row._index].vacOperator
-										},
-										on: {
-											'on-change': (event) => {
-												this.data.vacData[params.row._index].vacOperator = event
-											}
-										},
-									}, [
-										h('Option', {
-											props: {
-												value: '刘彬'
-											}
-										}, '刘彬'),
-										h('Option', {
-											props: {
-												value: '王明川'
-											}
+										  props: {
+										    value: '王明川'
+										  }
 										}, '王明川'),
 										h('Option', {
-											props: {
-												value: '杜浩哲'
-											}
+										  props: {
+										    value: '杜浩哲'
+										  }
 										}, '杜浩哲'),
-									]);
-									break;
-								case 'C':
-									return h('Select', {
-										props: {
-											placeholder: '配料员',
-											value: this.data.vacData[params.row._index].vacOperator
-										},
-										on: {
-											'on-change': (event) => {
-												this.data.vacData[params.row._index].vacOperator = event
-											}
-										},
-									}, [
 										h('Option', {
-											props: {
-												value: '孟庆寅'
-											}
-										}, '孟庆寅'),
+										  props: {
+										    value: '李全禄'
+										  }
+										}, '李全禄'),
 										h('Option', {
-											props: {
-												value: '徐云山'
-											}
+										  props: {
+										    value: '徐云山'
+										  }
 										}, '徐云山'),
 										h('Option', {
-											props: {
-												value: '杜浩哲'
-											}
-										}, '杜浩哲'),
+										  props: {
+										    value: '孟庆寅'
+										  }
+										}, '孟庆寅'),
+										h('Option', {
+										  props: {
+										    value: '张立亮'
+										  }
+										}, '张立亮'),
+										h('Option', {
+										  props: {
+										    value: '马际安'
+										  }
+										}, '马际安'),
 									]);
-									break;
-								default:
-									return h('Select', {
-										props: {
-											placeholder: '未选择班次',
-											value: this.data.vacData[params.row._index].vacOperator
-										},
-										on: {
-											'on-change': (event) => {
-												this.data.vacData[params.row._index].vacOperator = event
-											}
-										},
-									}, []);
-									break;
 							}
 
-						},
 					},
 				],
 				columns: [{
@@ -760,47 +728,56 @@
 
 				],
 				inspectors: [{
-						value: '1',
-						label: ''
-					},
-					{
-						value: '2',
-						label: ''
-					},
-					{
-						value: '3',
-						label: ''
-					},
+				    value: '关庆森',
+				    label: '关庆森'
+				  },
+				  {
+				    value: '李海亮',
+				    label: '李海亮'
+				  },
+				  {
+				    value: '孟祥东',
+				    label: '孟祥东'
+				  },
+				  {
+				    value: '王明川',
+				    label: '王明川'
+				  },{
+				    value: '杜浩哲',
+				    label: '杜浩哲'
+				  },{
+				    value: '李全禄',
+				    label: '李全禄'
+				  },{
+				    value: '徐云山',
+				    label: '徐云山'
+				  },{
+				    value: '孟庆寅',
+				    label: '孟庆寅'
+				  },{
+				    value: '张立亮',
+				    label: '张立亮'
+				  },{
+				    value: '马际安',
+				    label: '马际安'
+				  }
 
 				],
 				operator: [{
-						value: '1',
-						label: ''
-					},
-					{
-						value: '2',
-						label: ''
-					},
-					{
-						value: '3',
-						label: ''
-					},
+				    value: '关庆森',
+				    label: '关庆森'
+				  },
+				  {
+				    value: '王明川',
+				    label: '王明川'
+				  },
+				  {
+				    value: '徐云山',
+				    label: '徐云山'
+				  },
 
 				],
-				operator2: [{
-						value: '1',
-						label: ''
-					},
-					{
-						value: '2',
-						label: ''
-					},
-					{
-						value: '3',
-						label: ''
-					},
 
-				],
 				ylnamelist: [],
 			}
 		},
@@ -812,14 +789,17 @@
 					var a = this.data.ylData.length;
 					this.data.tolCount = [];
 					for(var i = 0; i < a; i++) {
-						if(this.data.ylData[i].deliveryCount != '') {
+						if(this.data.ylData[i].deliveryCount != null) {
+							this.data.tolCount.push(parseFloat(this.data.ylData[i].deliveryCount?this.data.ylData[i].deliveryCount:0))
+						}else{
+              this.data.tolCount.push(0)
 
-							this.data.tolCount.push(parseInt(this.data.ylData[i].deliveryCount))
-						}
+            }
 					}
-					console.log(a)
+					console.log(this.data.tolCount)
 					var result = 0;
 					for(var i = 0; i < this.data.tolCount.length; i++) {
+
 						result += this.data.tolCount[i];
 					}
 					this.data.totalCount = result;
@@ -878,43 +858,43 @@
 				},
 				deep: true
 			},
-			'data.shift': {
-				handler(newVal, oldVal) {
-					this.getNumber();
-					switch(newVal) {
-						case 'A':
-							this.data.cpsReviewer = '关庆森';
-							this.data.filInspector = '关庆森';
-							this.data.vacReviewer = '关庆森';
-							this.data.outputReviewer = '关庆森';
-							var a = ['李海亮', '关庆森', '杜浩哲'];
-							this.changePeople(this.operator, a);
-							this.changePeople(this.inspectors, a);
-							break;
-						case 'B':
-							this.data.cpsReviewer = '王明川';
-							this.data.filInspector = '王明川';
-							this.data.vacReviewer = '王明川';
-							this.data.outputReviewer = '王明川';
-							var b = ['刘彬', '王明川', '杜浩哲'];
-							this.changePeople(this.operator, b);
-							this.changePeople(this.inspectors, b);
-							break;
-						case 'C':
-							this.data.cpsReviewer = '徐云山';
-							this.data.filInspector = '徐云山';
-							this.data.vacReviewer = '徐云山';
-							this.data.outputReviewer = '徐云山';
-							var c = ['孟庆寅', '徐云山', '杜浩哲'];
-							this.changePeople(this.operator, c);
-							this.changePeople(this.inspectors, c);
-							break;
-						default:
-							break;
-					}
-				},
-				deep: true
-			},
+			// 'data.shift': {
+			// 	handler(newVal, oldVal) {
+			// 		this.getNumber();
+			// 		switch(newVal) {
+			// 			case 'A':
+			// 				this.data.cpsReviewer = '关庆森';
+			// 				this.data.filInspector = '关庆森';
+			// 				this.data.vacReviewer = '关庆森';
+			// 				this.data.outputReviewer = '关庆森';
+			// 				var a = ['李海亮', '关庆森', '杜浩哲'];
+			// 				this.changePeople(this.operator, a);
+			// 				this.changePeople(this.inspectors, a);
+			// 				break;
+			// 			case 'B':
+			// 				this.data.cpsReviewer = '王明川';
+			// 				this.data.filInspector = '王明川';
+			// 				this.data.vacReviewer = '王明川';
+			// 				this.data.outputReviewer = '王明川';
+			// 				var b = ['刘彬', '王明川', '杜浩哲'];
+			// 				this.changePeople(this.operator, b);
+			// 				this.changePeople(this.inspectors, b);
+			// 				break;
+			// 			case 'C':
+			// 				this.data.cpsReviewer = '徐云山';
+			// 				this.data.filInspector = '徐云山';
+			// 				this.data.vacReviewer = '徐云山';
+			// 				this.data.outputReviewer = '徐云山';
+			// 				var c = ['孟庆寅', '徐云山', '杜浩哲'];
+			// 				this.changePeople(this.operator, c);
+			// 				this.changePeople(this.inspectors, c);
+			// 				break;
+			// 			default:
+			// 				break;
+			// 		}
+			// 	},
+			// 	deep: true
+			// },
 
 		},
 		mounted() {
@@ -1017,7 +997,7 @@
 		font-size: 14px;
 		font-weight: 600;
 	}
-	
+
 	.top {
 		margin: 15px 0;
 	}

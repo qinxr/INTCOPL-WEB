@@ -108,21 +108,23 @@
 										}
 									}
 								}, '更改'),
-//								h('Button', {
-//									props: {
-//										type: 'error',
-//										size: 'small'
-//									},
-//									on: {
-//										click: () => {
-//											let argu = {
-//												id: params.row.id
-//											};
-//											this.plId = argu.id;
-//											this.ModalBool = true;
-//										}
-//									}
-//								}, '删除')
+								h('Button', {
+									props: {
+										type: 'error',
+										size: 'small'
+									},
+									on: {
+										click: () => {
+											let argu = {
+												id: params.row.id
+											};
+											this.$router.push({
+												name: 'plinfoAdd32',
+												params: argu
+											})
+										}
+									}
+								}, '二次配料')
 							]);
 						}
 					}
