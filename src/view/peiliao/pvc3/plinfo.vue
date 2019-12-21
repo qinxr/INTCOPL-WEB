@@ -95,8 +95,17 @@
             sortable: true,
           },
 					{
-						title: '批号',
-						key: 'lotNumber',
+					  title: '批号',
+					  key: '',
+					  render: (h, params) => {
+					    return h('div', [
+					      h('span', {
+					        style: {
+					          color: params.row.restTankNumber?'green':'blue'
+					        }
+					      }, params.row.lotNumber),
+					    ]);
+					  }
 					},
 					{
 						title: '操作',
@@ -127,7 +136,7 @@
 								}, '更改'),
 								h('Button', {
 									props: {
-										type: 'error',
+										type: params.row.restEndTime == null ? 'success' : 'error',
 										size: 'small'
 									},
 									on: {
