@@ -776,6 +776,7 @@
         handler(newVal, oldVal) {
           this.changeTime(this.data.detTime[0].dettime);
           this.data.restStartTime = this.data.formDate + ' ' + this.data.detTime[6].dettime;
+          this.data.restTemperature =  this.data.detTime[6].detTemperature;
           console.log(this.data.restStartTime)
         },
         deep: true
@@ -853,7 +854,7 @@
     },
     mounted() {
       var copy = this;
-      axios.get(copy.pub.url + '/pladmin/getPlnames')
+      axios.get(copy.pub.url + '/pladmin/getPlnames/1')
         .then(function(response) {
           if (response.data.head == 200) {
             copy.ylnamelist = response.data.data;
@@ -874,6 +875,17 @@
               .then(function(response) {
                 if (response.data.head == 200) {
                   that.$Message.success(response.data.message);
+
+                  // that.data.formDate= '';
+                  // that.data.shift= '';
+                  // that.data.stirStartTime= '';
+                  // that.data.stirEndTime= '';
+                  // that.data.mixerNumber= '';
+                  // that.data.totalTime= '';
+                  // that.data.visDegree= '';
+                  // that.data.finDegree= '';
+                  // that.data.inspectors= '';
+                  that.reload();
                 } else {
                   that.$Message.error(response.data.message);
                 }

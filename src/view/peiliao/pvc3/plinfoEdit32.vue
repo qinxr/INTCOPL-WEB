@@ -594,9 +594,9 @@
 											}, '张志昊'),
 											h('Option', {
 												props: {
-													value: '张怀俊'
+													value: '武浩'
 												}
-											}, '张怀俊'),
+											}, '武浩'),
 											h('Option', {
 												props: {
 													value: '杨远森'
@@ -633,9 +633,9 @@
 											}, '任永涛'),
 											h('Option', {
 												props: {
-													value: '宋林玮'
+													value: '武毅'
 												}
-											}, '宋林玮'),
+											}, '武毅'),
 										]);
 										break;
 								default:
@@ -939,7 +939,7 @@
 							this.data.filInspector = '马华亭';
 							this.data.vacReviewer = '马华亭';
 							this.data.outputReviewer = '马华亭';
-							var b = ['马华亭','张志昊', '张怀俊', '杨远森'];
+							var b = ['马华亭','张志昊', '武浩', '杨远森'];
 							this.changePeople(this.operator, b);
 							this.changePeople(this.inspectors, b);
 							break;
@@ -948,7 +948,7 @@
 							this.data.filInspector = '李星晓';
 							this.data.vacReviewer = '李星晓';
 							this.data.outputReviewer = '李星晓';
-							var c = ['李星晓','刁玉朕', '任永涛', '宋林玮'];
+							var c = ['李星晓','刁玉朕', '任永涛', '武毅'];
 							this.changePeople(this.operator, c);
 							this.changePeople(this.inspectors, c);
 							break;

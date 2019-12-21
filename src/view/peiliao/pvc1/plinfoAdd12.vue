@@ -10,6 +10,7 @@
 				<Select v-model="data.shift" size="small" style="width:100px; float: right;">
 					<i-option v-for="item in classes" :value="item.value" :key="item.value">{{ item.label }}</i-option>
 				</Select>
+        <span  class="intro" style="float: right;" >班次:&nbsp;&nbsp;&nbsp;</span>
 			</p>
 			<Form ref="data" :model="data" :rules="ruleValidate">
 				<Row>

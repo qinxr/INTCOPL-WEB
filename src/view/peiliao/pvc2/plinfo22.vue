@@ -3,7 +3,7 @@
 	<Row>
 		<Card dis-hover>
 			<p slot="title" style="height: auto;">二次配料记录表概览
-				<Button type="primary" size="small" style="margin-left: 15px;" @click="link()">新增记录表</Button>
+				<!-- <Button type="primary" size="small" style="margin-left: 15px;" >新增记录表</Button> -->
 				<Button type="success" size="small" style="margin-left: 20px; float: right;" @click="this.reload"><Icon type="md-refresh" />刷新</Button>
 			</p>
 
@@ -64,7 +64,7 @@
 						key: 'factory',
 						render: (h, params) => {
 							return h('div', [
-								params.row.factory == 1 ? "PVC一厂":"PVC二厂"
+								params.row.factory == 2 ? "PVC二厂":""
 							]);
 						}
 					},
@@ -164,10 +164,10 @@
 			},
 			link() {
 				this.$router.push({
-					name: 'plinfoAdd1'
+					name: 'plinfoAdd2'
 				})
 			},
-			//搜索触发函数	
+			//搜索触发函数
 			handleSearch1() {
 				if(this.searchConName1 == "") {
 					this.plData = this.historyData.slice(0, this.pageSize);

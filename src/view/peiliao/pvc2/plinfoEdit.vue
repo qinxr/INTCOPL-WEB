@@ -1,7 +1,7 @@
 <template>
 	<Row>
 		<Card>
-			<p slot="title" style="height: 25px;">PVC配料记录表（一）-PVC一厂
+			<p slot="title" style="height: 25px;">PVC配料记录表（一）-PVC二厂
 				<Button type="primary" size="small" style="margin-left: 15px; float: right;" @click="addpl()">保存修改</Button>
 				<Select v-model="data.recipe" size="small" style="width:100px; float: right;">
 					<i-option v-for="item in recipe" :value="item.value" :key="item.value">{{ item.label }}</i-option>
@@ -93,7 +93,7 @@
 							<tr>
 								<td style="width:13%;">检测时间:</td>
 								<td v-for='item in data.detTime'>
-									<TimePicker  :value="item.detTime" format="HH:mm" @on-change="item.dettime=$event" placeholder="Select time" style="width: 100%"></TimePicker>
+									<TimePicker  :value="item.detTime" format="HH:mm" @on-change="item.detTime=$event" placeholder="Select time" style="width: 100%"></TimePicker>
 								</td>
 							</tr>
 							<tr>
@@ -206,25 +206,25 @@
 						reviewer: '',
 					},
 					detTime: [{ //检测时间和检测温度
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, ],
 					restStartTime: '', //开始静置时间
@@ -355,9 +355,9 @@
 						title: '投放时间',
 						key: 'startTime',
 						render: (h, params) => {
-							return h('TimePicker', {
+							return h('Date-picker', {
 								props: {
-									format: "HH:mm",
+									format: "yyyy-MM-dd HH:mm",
 									placeholder: '投放时间',
 									value: this.data.ylData[params.row._index].startTime
 								},
@@ -373,9 +373,9 @@
 						title: '结束时间',
 						key: 'endTime',
 						render: (h, params) => {
-							return h('TimePicker', {
+							return h('Date-picker', {
 								props: {
-									format: "HH:mm",
+									format: "yyyy-MM-dd HH:mm",
 									placeholder: '结束时间',
 									value: this.data.ylData[params.row._index].endTime
 								},
@@ -586,7 +586,9 @@
 			//监测检测数据变化自动生成时间
 			'data.detTime': {
 				handler(newVal, oldVal) {
-					this.changeTime(this.data.detTime[0].dettime);
+					this.changeTime(this.data.detTime[0].detTime);
+          this.data.restStartTime = this.data.formDate + ' ' + this.data.detTime[7].detTime;
+          this.data.restTemperature =  this.data.detTime[this.data.detTime.length-1].detTemperature;
 				},
 				deep: true
 			},
@@ -628,13 +630,13 @@
 							break;
 						case 'B':
 							this.data.reviewman = '马华亭';
-							var b = ['马华亭','张志昊', '张怀俊', '杨远森'];
+							var b = ['马华亭','张志昊', '武浩', '杨远森'];
 							this.changePeople(this.operator, b);
 							this.changePeople(this.inspectors, b);
 							break;
 						case 'C':
 							this.data.reviewman = '李星晓';
-							var c = ['李星晓','刁玉朕', '任永涛', '宋林玮'];
+							var c = ['李星晓','刁玉朕', '任永涛', '武毅'];
 							this.changePeople(this.operator, c);
 							this.changePeople(this.inspectors, c);
 							break;
@@ -653,11 +655,11 @@
 							this.changePeople(this.operator2, a);
 							break;
 						case 'B':
-							var b = ['马华亭','张志昊', '张怀俊', '杨远森'];
+							var b = ['马华亭','张志昊', '武浩', '杨远森'];
 							this.changePeople(this.operator2, b);
 							break;
 						case 'C':
-							var c = ['李星晓','刁玉朕', '任永涛', '宋林玮'];
+							var c = ['李星晓','刁玉朕', '任永涛', '武毅'];
 							this.changePeople(this.operator2, c);
 							break;
 						default:
@@ -716,25 +718,28 @@
           allData.detTime = response.data.data[2];
           }else{
             allData.detTime=[{ //检测时间和检测温度
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
 						detTemperature: ''
 					}, {
-						dettime: '',
+						detTime: '',
+						detTemperature: ''
+					}, {
+						detTime: '',
 						detTemperature: ''
 					}, ]
           }
@@ -752,22 +757,33 @@
 		},
 		methods: {
 			addpl() {
-				var that = this;
-				axios.post(that.pub.url + '/pladmin/addPlInfo', that.data)
-					.then(function(response) {
-						if(response.data.head == 200) {
-							that.$Message.success(response.data.message);
-						} else {
-							that.$Message.error(response.data.message);
-						}
-					})
-					.catch(function(error) {});
+				// var that = this;
+				// axios.post(that.pub.url + '/pladmin/addPlInfo', that.data)
+				// 	.then(function(response) {
+				// 		if(response.data.head == 200) {
+				// 			that.$Message.success(response.data.message);
+				// 		} else {
+				// 			that.$Message.error(response.data.message);
+				// 		}
+				// 	})
+				// 	.catch(function(error) {});
+        let index = parseInt(this.$route.params.id.toString());
+        var that = this;
+        axios.post(that.pub.url + '/pladmin/editpl/'+index, that.data)
+        	.then(function(response) {
+        		if(response.data.head == 200) {
+        			that.$Message.success(response.data.message);
+        		} else {
+        			that.$Message.error(response.data.message);
+        		}
+        	})
+        	.catch(function(error) {});
 			},
 			changeTime(time) {
 				var hour = parseInt(time.slice(0, 2)) * 60;
 				var minute = parseInt(time.slice(3, 5));
 				var all = hour + minute;
-				for(var i = 0; i < 5; i++) {
+				for(var i = 0; i <  this.data.detTime.length - 1; i++) {
 					all = all + 30;
 					var newhour = (Math.floor(all / 60)).toString().length < 2 ? "0" + (Math.floor(all / 60)).toString() : (Math.floor(all / 60)).toString();
 					var newMinute = (all % 60).toString().length < 2 ? "0" + (all % 60).toString() : (all % 60).toString();
@@ -776,7 +792,7 @@
 					} else {
 
 					}
-					this.data.detTime[i + 1].dettime = newhour + ':' + newMinute;
+					this.data.detTime[i + 1].detTime = newhour + ':' + newMinute;
 				}
 			},
 			changePeople(data, arr) {

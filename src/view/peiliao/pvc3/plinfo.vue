@@ -5,6 +5,8 @@
 			<p slot="title" style="height: auto;">一次配料记录表概览
 				<Button type="primary" size="small" style="margin-left: 15px;" @click="link()">新增记录表</Button>
 				<Button type="success" size="small" style="margin-left: 20px; float: right;" @click="this.reload"><Icon type="md-refresh" />刷新</Button>
+        <Button type="primary" size="small" style="margin-left: 20px; float: right;" @click="this.getData">倒序排列<Icon type="md-arrow-round-down" /></Button>
+        <Button type="primary" size="small" style="margin-left: 20px; float: right;" @click="this.getDataAsc">正序排列<Icon type="md-arrow-round-up" /></Button>
 			</p>
 
 			<div class="edittable-table-height-con">
@@ -64,19 +66,34 @@
 						key: 'factory',
 						render: (h, params) => {
 							return h('div', [
-								params.row.factory == 1 ? "PVC一厂":"PVC二厂"
+								params.row.factory == 3 ? "PVC三厂":" "
 							]);
 						}
 					},
+          {
+          	title: '日期',
+          	key: 'formDate',
+            sortable: true,
+          },
 					{
 						title: '班次',
 						key: 'shift',
-						render: (h, params) => {
-							return h('div', [
-								params.row.shift == 1 ? "A班" :params.row.shift == 2 ?"B班" :'C班'
-							]);
-						}
+						// render: (h, params) => {
+						// 	return h('div', [
+						// 		params.row.shift == 1 ? "A班" :params.row.shift == 2 ?"B班" :'C班'
+						// 	]);
+						// }
 					},
+          {
+          	title: '搅拌开始时间',
+          	key: 'stirStartTime',
+            sortable: true,
+          },
+          {
+          	title: '搅拌结束时间',
+          	key: 'stirEndTime',
+            sortable: true,
+          },
 					{
 						title: '批号',
 						key: 'lotNumber',
@@ -164,6 +181,31 @@
 						console.log(error);
 					});
 			},
+      getDataAsc() {
+      	var copy = this;
+      	axios.get(copy.pub.url + '/pladmin/getPlInfosAsc/3')
+      		.then(function(response) {
+
+      			copy.historyData = response.data.data;
+
+      			copy.dataCount = copy.historyData.length;
+      			// 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
+      			if(copy.historyData.length < copy.pageSize) {
+      				copy.plData = copy.historyData;
+      			} else {
+      				copy.plData = copy.historyData.slice(0, copy.pageSize);
+      			}
+      			if(sessionStorage.getItem("page")) {
+      				var a = sessionStorage.getItem("page")
+      				copy.changePage(a);
+      			} else {
+
+      			}
+      		})
+      		.catch(function(error) {
+      			console.log(error);
+      		});
+      },
 			link() {
 				this.$router.push({
 					name: 'plinfoAdd3'
@@ -204,7 +246,7 @@
 					})
 					.catch(function(error) {});
 			},
-			//搜索触发函数	
+			//搜索触发函数
 			handleSearch1() {
 				if(this.searchConName1 == "") {
 					this.plData = this.historyData.slice(0, this.pageSize);

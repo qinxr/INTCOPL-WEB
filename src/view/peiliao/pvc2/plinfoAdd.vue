@@ -148,7 +148,7 @@
 						<Col span="2" offset="1" class="intro">操作员:</Col>
 						<Col span="5">
 						<Select v-model="data.restStartOperator" style="width:100%">
-							<i-option v-for="item in operator2" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+							<i-option v-for="item in operator" :value="item.value" :key="item.value">{{ item.label }}</i-option>
 						</Select>
 						</Col>
 					</Row>
@@ -541,11 +541,11 @@
 													value: '翟乃田'
 												}
 											}, '翟乃田'),
-											h('Option', {
-												props: {
-													value: '车林祥'
-												}
-											}, '车林祥'),
+                      h('Option', {
+                      	props: {
+                      		value: '姜兴海'
+                      	}
+                      }, '姜兴海'),
 										]);
 										break;
 									case 'B':
@@ -599,11 +599,11 @@
 													value: '李孝明'
 												}
 											}, '李孝明'),
-											h('Option', {
-												props: {
-													value: '袁崇利'
-												}
-											}, '袁崇利'),
+                      h('Option', {
+                      	props: {
+                      		value: '姜兴海'
+                      	}
+                      }, '姜兴海'),
 										]);
 										break;
 									default:
@@ -669,9 +669,9 @@
 											}, '张志昊'),
 											h('Option', {
 												props: {
-													value: '张怀俊'
+													value: '武浩'
 												}
-											}, '张怀俊'),
+											}, '武浩'),
 											h('Option', {
 												props: {
 													value: '杨远森'
@@ -708,9 +708,9 @@
 											}, '任永涛'),
 											h('Option', {
 												props: {
-													value: '宋林玮'
+													value: '武毅'
 												}
-											}, '宋林玮'),
+											}, '武毅'),
 										]);
 										break;
 									default:
@@ -859,6 +859,7 @@
 
 				],
 				ylnamelist: [],
+        emptyData:'',
 			}
 		},
 
@@ -932,13 +933,13 @@
 							break;
 						case 'B':
 							this.data.reviewman = '马华亭';
-							var b = ['马华亭','张志昊', '张怀俊', '杨远森'];
+							var b = ['马华亭','张志昊', '武浩', '杨远森'];
 							this.changePeople(this.operator, b);
 							this.changePeople(this.inspectors, b);
 							break;
 						case 'C':
 							this.data.reviewman = '李星晓';
-							var c = ['李星晓','刁玉朕', '任永涛', '宋林玮'];
+							var c = ['李星晓','刁玉朕', '任永涛', '武毅'];
 							this.changePeople(this.operator, c);
 							this.changePeople(this.inspectors, c);
 							break;
@@ -957,11 +958,11 @@
 							this.changePeople(this.operator2, a);
 							break;
 						case 'B':
-							var b = ['马华亭','张志昊', '张怀俊', '杨远森'];
+							var b = ['马华亭','张志昊', '武浩', '杨远森'];
 							this.changePeople(this.operator2, b);
 							break;
 						case 'C':
-							var c = ['李星晓','刁玉朕', '任永涛', '宋林玮'];
+							var c = ['李星晓','刁玉朕', '任永涛', '武毅'];
 							this.changePeople(this.operator2, c);
 							break;
 						default:
@@ -986,8 +987,9 @@
 
 		},
 		mounted() {
+      this.emptyData=this.data;
 			var copy = this;
-			axios.get(copy.pub.url + '/pladmin/getPlnames')
+			axios.get(copy.pub.url + '/pladmin/getPlnames/2')
 				.then(function(response) {
 					if(response.data.head == 200) {
 						copy.ylnamelist = response.data.data;
@@ -1008,6 +1010,19 @@
 							.then(function(response) {
 								if(response.data.head == 200) {
 									that.$Message.success(response.data.message);
+
+                 // that.data.formDate= '';
+                 // that.data.shift= '';
+                 // that.data.stirStartTime= '';
+                 // that.data.stirEndTime= '';
+                 // that.data.mixerNumber= '';
+                 // that.data.totalTime= '';
+                 // that.data.visDegree= '';
+                 // that.data.finDegree= '';
+                 // that.data.inspectors= '';
+                  that.reload();
+
+
 								} else {
 									that.$Message.error(response.data.message);
 								}

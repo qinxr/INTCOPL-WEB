@@ -792,27 +792,30 @@
           allData.detTime = response.data.data[2];
           }else{
             allData.detTime=[{ //检测时间和检测温度
-          	dettime: '',
+          	detTime: '',
           	detTemperature: ''
           }, {
-          	dettime: '',
+          	detTime: '',
           	detTemperature: ''
           }, {
-          	dettime: '',
+          	detTime: '',
           	detTemperature: ''
           }, {
-          	dettime: '',
+          	detTime: '',
           	detTemperature: ''
           }, {
-          	dettime: '',
+          	detTime: '',
           	detTemperature: ''
           }, {
-          	dettime: '',
+          	detTime: '',
           	detTemperature: ''
           }, {
-          	dettime: '',
+          	detTime: '',
           	detTemperature: ''
-          }, ]
+          }, {
+						detTime: '',
+						detTemperature: ''
+					}, ]
           }
 
           allData.recipe = allData.lotNumber.slice(0, 2);
