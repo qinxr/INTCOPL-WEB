@@ -357,6 +357,22 @@
 							endTime: '',
 							description: '',
 						},
+            {
+            	rawName: '白色膏',
+            	lotNumber: '',
+            	deliveryCount: '',
+            	startTime: '',
+            	endTime: '',
+            	description: '',
+            },
+            {
+            	rawName: '蓝色膏',
+            	lotNumber: '',
+            	deliveryCount: '',
+            	startTime: '',
+            	endTime: '',
+            	description: '',
+            },
 					],
 					endCps: '', //调整后粘度
 					cpsFlag: '', //高低料
@@ -848,6 +864,10 @@
 						value: '3',
 						label: ''
 					},
+          {
+          	value: '4',
+          	label: ''
+          },
 
 				],
 				operator: [{
@@ -862,6 +882,10 @@
 						value: '3',
 						label: ''
 					},
+          {
+          	value: '4',
+          	label: ''
+          },
 
 				],
 				operator2: [{
@@ -876,7 +900,10 @@
 						value: '3',
 						label: ''
 					},
-
+           {
+           	value: '4',
+           	label: ''
+           },
 				],
 				ylnamelist: [],
 			}

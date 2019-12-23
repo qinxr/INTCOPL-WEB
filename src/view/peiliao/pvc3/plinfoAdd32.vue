@@ -848,7 +848,10 @@
 						value: '3',
 						label: ''
 					},
-
+          {
+          	value: '4',
+          	label: ''
+          },
 				],
 				operator: [{
 						value: '1',
@@ -862,7 +865,10 @@
 						value: '3',
 						label: ''
 					},
-
+          {
+          	value: '4',
+          	label: ''
+          },
 				],
 				operator2: [{
 						value: '1',
@@ -876,7 +882,10 @@
 						value: '3',
 						label: ''
 					},
-
+          {
+          	value: '4',
+          	label: ''
+          },
 				],
 				ylnamelist: [],
 			}

@@ -306,30 +306,35 @@
 									props: {
 										value: '9'
 									}
-								}, 'PVC 粉（沈化）'),
+								}, '弹性体'),
 								h('Option', {
 									props: {
 										value: '10'
 									}
-								}, 'PVC粉（三友）'),
+								}, 'PVC 粉（沈化）'),
 								h('Option', {
 									props: {
 										value: '11'
 									}
-								}, 'PVC粉（郎辉）'),
+								}, 'PVC粉（三友）'),
 								h('Option', {
 									props: {
 										value: '12'
 									}
-								}, 'PVC粉（台塑F）'),
+								}, 'PVC粉（郎辉）'),
 								h('Option', {
 									props: {
 										value: '13'
 									}
-								}, 'PVC粉（台塑G)'),
+								}, 'PVC粉（台塑F）'),
 								h('Option', {
 									props: {
 										value: '14'
+									}
+								}, 'PVC粉（台塑G)'),
+								h('Option', {
+									props: {
+										value: '15'
 									}
 								}, 'PVC粉（其他）'),
 							]);

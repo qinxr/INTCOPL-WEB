@@ -406,34 +406,39 @@
 										value: '8'
 									}
 								}, '钙锌（原塑）'),
-								h('Option', {
-									props: {
-										value: '9'
-									}
-								}, 'PVC 粉（沈化）'),
+                h('Option', {
+                	props: {
+                		value: '9'
+                	}
+                }, '弹性体'),
 								h('Option', {
 									props: {
 										value: '10'
 									}
-								}, 'PVC粉（三友）'),
+								}, 'PVC 粉（沈化）'),
 								h('Option', {
 									props: {
 										value: '11'
 									}
-								}, 'PVC粉（郎辉）'),
+								}, 'PVC粉（三友）'),
 								h('Option', {
 									props: {
 										value: '12'
 									}
-								}, 'PVC粉（台塑F）'),
+								}, 'PVC粉（郎辉）'),
 								h('Option', {
 									props: {
 										value: '13'
 									}
-								}, 'PVC粉（台塑G)'),
+								}, 'PVC粉（台塑F）'),
 								h('Option', {
 									props: {
 										value: '14'
+									}
+								}, 'PVC粉（台塑G)'),
+								h('Option', {
+									props: {
+										value: '15'
 									}
 								}, 'PVC粉（其他）'),
 							]);
@@ -517,7 +522,7 @@
 						title: '配料员',
 						key: 'formulator',
 						render: (h, params) => {
-							if(parseInt(this.data.ylData[params.row._index].rawName) >= 9) {
+							if(parseInt(this.data.ylData[params.row._index].rawName) >= 10) {
 								switch(this.data.shift) {
 									case 'A':
 										return h('Select', {
@@ -821,6 +826,10 @@
 						value: '3',
 						label: ''
 					},
+          {
+          	value: '4',
+          	label: ''
+          },
 
 				],
 				operator: [{
