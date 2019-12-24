@@ -71,7 +71,7 @@
             </Col>
             <Col span="2" offset="1">
             <Select placeholder='配方选择' style="width:100%" v-model="data.yllist" @on-change="nameChange(data.yllist)">
-              <i-option v-for="item in ylnamelist" :value="item.ylname" :key="item.ylname">{{ item.ylname }}</i-option>
+              <i-option v-for="item in ylnamelist" :value="item.id" :key="item.id">{{ item.ylname }}</i-option>
             </Select>
             </Col>
             <Col span="2" offset="1">
