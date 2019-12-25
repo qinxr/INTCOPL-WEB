@@ -200,6 +200,7 @@
 			return {
 
 				data: {
+          uuid:'',
 					recipe: '01',
 					formDate: '', //日期
 					shift: '', //班次
@@ -868,7 +869,7 @@
 
 				],
 				ylnamelist: [],
-        
+
 			}
 		},
 
@@ -997,6 +998,8 @@
 		},
 		mounted() {
 			var copy = this;
+      this.data.uuid=(Math.random().toString().substr(3,5) + Date.now()).toString(36);
+      console.log(this.data.uuid)
 			axios.get(copy.pub.url + '/pladmin/getPlnames/2')
 				.then(function(response) {
 					if(response.data.head == 200) {
@@ -1019,8 +1022,8 @@
 								if(response.data.head == 200) {
 									that.$Message.success(response.data.message);
 
-                 that.data.formDate= '';
-                 that.data.shift= '';
+                 // that.data.formDate= '';
+                 // that.data.shift= '';
                  // that.data.stirStartTime= '';
                  // that.data.stirEndTime= '';
                  // that.data.mixerNumber= '';
