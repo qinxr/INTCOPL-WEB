@@ -304,6 +304,7 @@
 			return {
 
 				data: {
+          uuid:'',
 					recipe: '01',
 					shift: '', //班次
 					factory: '2', //厂区
@@ -1023,6 +1024,8 @@
 
 		},
 		mounted() {
+      this.data.uuid=(Math.random().toString().substr(3,5) + Date.now()).toString(36);
+      console.log(this.data.uuid)
 			if(this.$route.params.id) {
 
 				let index = parseInt(this.$route.params.id.toString());
