@@ -1020,8 +1020,8 @@
 								if(response.data.head == 200) {
 									that.$Message.success(response.data.message);
 
-                 // that.data.formDate= '';
-                 // that.data.shift= '';
+                 that.data.formDate= '';
+                 that.data.shift= '';
                  // that.data.stirStartTime= '';
                  // that.data.stirEndTime= '';
                  // that.data.mixerNumber= '';
@@ -1107,7 +1107,12 @@
 				axios.post(copy.pub.url + '/pladmin/getPlAsName/' + index)
 					.then(function(response) {
 						copy.data.ylData = response.data.data;
-						console.log(response.data)
+            for (var i = 0; i < copy.data.ylData.length; i++) {
+               copy.data.ylData[i].startTime='';
+               copy.data.ylData[i].endTime='';
+               copy.data.ylData[i].formulator='';
+               copy.data.ylData[i].reviewer='';
+            }
 					})
 					.catch(function(error) {});
 			},
