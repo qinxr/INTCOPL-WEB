@@ -298,7 +298,7 @@
 
 	export default {
 
-		name: 'plinfoAdd1',
+		name: 'plinfoAdd32',
 		inject: ['reload'],
 		data() {
 			return {
@@ -1033,6 +1033,7 @@
 							.then(function(response) {
 								if(response.data.head == 200) {
 									that.$Message.success(response.data.message);
+                  that.reload();
 								} else {
 									that.$Message.error(response.data.message);
 								}

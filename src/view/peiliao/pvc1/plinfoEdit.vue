@@ -166,7 +166,7 @@
 
 	export default {
 
-		name: 'plinfoEdit',
+		name: 'plinfoEdit1',
 		inject: ['reload'],
 		data() {
 			return {

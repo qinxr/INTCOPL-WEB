@@ -297,7 +297,7 @@
 
 	export default {
 
-		name: 'plinfoEdit12',
+		name: 'plinfoEdit22',
 		inject: ['reload'],
 		data() {
 			return {

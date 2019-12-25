@@ -51,6 +51,7 @@
   import excel from '@/libs/excel'
 
   export default {
+    name: 'plinfo2',
     inject: ['reload'],
     data() {
       return {

@@ -44,6 +44,7 @@
 	import excel from '@/libs/excel'
 
 	export default {
+    name: 'plinfo32',
 		inject: ['reload'],
 		data() {
 			return {
