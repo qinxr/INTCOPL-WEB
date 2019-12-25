@@ -868,7 +868,7 @@
 
 				],
 				ylnamelist: [],
-        emptyData:'',
+        
 			}
 		},
 
@@ -996,7 +996,6 @@
 
 		},
 		mounted() {
-      this.emptyData=this.data;
 			var copy = this;
 			axios.get(copy.pub.url + '/pladmin/getPlnames/2')
 				.then(function(response) {
