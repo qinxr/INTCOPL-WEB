@@ -895,9 +895,19 @@
 			// 	},
 			// 	deep: true
 			// },
+      '$route.params': {
+        handler(newVal, oldVal) {
+          this.getData();
+        },
+        deep: true
+      },
 
 		},
 		mounted() {
+      this.getData()
+		},
+		methods: {
+      getData(){
 			var copy = this;
 			let index = parseInt(this.$route.params.id.toString());
 			axios.post(copy.pub.url + '/pladminSec/getPlAsId/' + index)
@@ -914,8 +924,8 @@
 				.catch(function(error) {
 					console.log(error);
 				});
-		},
-		methods: {
+        
+      },
 			addpl() {
 				let index = parseInt(this.$route.params.id.toString());
 				var that = this;

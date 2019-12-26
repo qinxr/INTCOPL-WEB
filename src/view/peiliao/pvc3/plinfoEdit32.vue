@@ -967,27 +967,36 @@
 				},
 				deep: true
 			},
+      '$route.params': {
+        handler(newVal, oldVal) {
+          this.getData();
+        },
+        deep: true
+      },
 
 		},
 		mounted() {
-			var copy = this;
-			let index = parseInt(this.$route.params.id.toString());
-			axios.post(copy.pub.url + '/pladminSec/getPlAsId/' + index)
-				.then(function(response) {
-					var allData='';
-					allData = response.data.data[0];
-					allData.ylData = response.data.data[1];
-					allData.vacData = response.data.data[2];
-					copy.data=allData;
-					//					copy.data.shift = copy.data.lotNumber.slice(10, 11);
-					console.log(copy.data.ylData)
-
-				})
-				.catch(function(error) {
-					console.log(error);
-				});
+			this.getData()
 		},
 		methods: {
+      getData(){
+        var copy = this;
+        let index = parseInt(this.$route.params.id.toString());
+        axios.post(copy.pub.url + '/pladminSec/getPlAsId/' + index)
+        	.then(function(response) {
+        		var allData='';
+        		allData = response.data.data[0];
+        		allData.ylData = response.data.data[1];
+        		allData.vacData = response.data.data[2];
+        		copy.data=allData;
+        		//					copy.data.shift = copy.data.lotNumber.slice(10, 11);
+        		console.log(copy.data.ylData)
+        
+        	})
+        	.catch(function(error) {
+        		console.log(error);
+        	});
+      },
 			addpl() {
 				let index = parseInt(this.$route.params.id.toString());
 				var that = this;

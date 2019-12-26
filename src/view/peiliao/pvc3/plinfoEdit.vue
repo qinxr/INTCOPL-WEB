@@ -682,69 +682,78 @@
 				},
 				deep: true
 			},
+      '$route.params': {
+        handler(newVal, oldVal) {
+          this.getData();
+        },
+        deep: true
+      },
 
 		},
 		mounted() {
-			let index = parseInt(this.$route.params.id.toString());
-			var copy = this;
-			axios.post(copy.pub.url + '/pladmin/getPlAsId/' + index)
-				.then(function(response) {
-
-					var allData='';
-					allData = response.data.data[0];
-					allData.recipe = allData.lotNumber.slice(0, 2);
-					if (response.data.data[1].length!=0) {
-					allData.ylData = response.data.data[1];
-					}else{
-					  allData.ylData=[{
-					    rawName: '',
-					    lotNumber: '',
-					    startTime: '',
-					    endTime: '',
-					    deliveryCount: '',
-					    formulator: '',
-					    reviewer: '',
-					  }]
-					}
-					if (response.data.data[2].length!=0) {
-					allData.detTime = response.data.data[2];
-					}else{
-					  allData.detTime=[{ //检测时间和检测温度
-						detTime: '',
-						detTemperature: ''
-					}, {
-						detTime: '',
-						detTemperature: ''
-					}, {
-						detTime: '',
-						detTemperature: ''
-					}, {
-						detTime: '',
-						detTemperature: ''
-					}, {
-						detTime: '',
-						detTemperature: ''
-					}, {
-						detTime: '',
-						detTemperature: ''
-					}, {
-						detTime: '',
-						detTemperature: ''
-					}, {
-						detTime: '',
-						detTemperature: ''
-					}, ]
-					}
-
-					allData.recipe = allData.lotNumber.slice(0, 2);
-					   copy.data=allData;
-
-				})
-				.catch(function(error) {
-					console.log(error);
-				});
+			this.getData();
 		},
 		methods: {
+      getData(){
+        let index = parseInt(this.$route.params.id.toString());
+        var copy = this;
+        axios.post(copy.pub.url + '/pladmin/getPlAsId/' + index)
+        	.then(function(response) {
+        
+        		var allData='';
+        		allData = response.data.data[0];
+        		allData.recipe = allData.lotNumber.slice(0, 2);
+        		if (response.data.data[1].length!=0) {
+        		allData.ylData = response.data.data[1];
+        		}else{
+        		  allData.ylData=[{
+        		    rawName: '',
+        		    lotNumber: '',
+        		    startTime: '',
+        		    endTime: '',
+        		    deliveryCount: '',
+        		    formulator: '',
+        		    reviewer: '',
+        		  }]
+        		}
+        		if (response.data.data[2].length!=0) {
+        		allData.detTime = response.data.data[2];
+        		}else{
+        		  allData.detTime=[{ //检测时间和检测温度
+        			detTime: '',
+        			detTemperature: ''
+        		}, {
+        			detTime: '',
+        			detTemperature: ''
+        		}, {
+        			detTime: '',
+        			detTemperature: ''
+        		}, {
+        			detTime: '',
+        			detTemperature: ''
+        		}, {
+        			detTime: '',
+        			detTemperature: ''
+        		}, {
+        			detTime: '',
+        			detTemperature: ''
+        		}, {
+        			detTime: '',
+        			detTemperature: ''
+        		}, {
+        			detTime: '',
+        			detTemperature: ''
+        		}, ]
+        		}
+        
+        		allData.recipe = allData.lotNumber.slice(0, 2);
+        		   copy.data=allData;
+        
+        	})
+        	.catch(function(error) {
+        		console.log(error);
+        	});
+      },
 			addpl() {
 				let index = parseInt(this.$route.params.id.toString());
 				var that = this;
