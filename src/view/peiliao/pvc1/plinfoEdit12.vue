@@ -222,7 +222,7 @@
 					</Col>
 					<Col span="2" offset="1" class="intro">放料员:</Col>
 					<Col span="3">
-					<Select v-model="data.endOperator" style="width:100%">
+					<Select v-model="data.endOperator" style="width:100%" filterable>
 						<i-option v-for="item in inspectors" :value="item.value" :key="item.value">{{ item.label }}</i-option>
 					</Select>
 					</Col>

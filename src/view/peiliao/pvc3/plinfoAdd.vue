@@ -357,6 +357,7 @@
 						render: (h, params) => {
 							return h('Select', {
 								props: {
+                  filterable:true,
 									value: this.data.ylData[params.row._index].rawName
 								},
 								on: {

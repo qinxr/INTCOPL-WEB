@@ -263,8 +263,8 @@
 					</Col>
 					<Col span="2" offset="1" class="intro">放料员:</Col>
 					<Col span="3">
-					<Select v-model="data.endOperator" style="width:100%">
-						<i-option v-for="item in inspectors" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+					<Select v-model="data.endOperator" style="width:100%" filterable>
+						<i-option v-for="item in allOperator" :value="item.value" :key="item.value">{{ item.label }}</i-option>
 					</Select>
 					</Col>
 				</Row>
@@ -836,22 +836,55 @@
 						label: ''
 					},
 				],
-				operator2: [{
-						value: '1',
-						label: ''
+				allOperator: [{
+						value: '马文桂',
+						label: '马文桂'
 					},
 					{
-						value: '2',
-						label: ''
+						value: '刘长涛',
+						label: '刘长涛'
 					},
 					{
-						value: '3',
-						label: ''
+						value: '马超',
+						label: '马超'
 					},
-					{
-						value: '4',
-						label: ''
-					},
+				   {
+				   	value: '聂培珍',
+				   	label: '聂培珍'
+				   },
+				   {
+				   	value: '马华亭',
+				   	label: '马华亭'
+				   },
+				   {
+				   	value: '张志昊',
+				   	label: '张志昊'
+				   },
+				    {
+				    	value: '武浩',
+				    	label: '武浩'
+				    },
+				    {
+				    	value: '杨远森',
+				    	label: '杨远森'
+				    },
+				    {
+				    	value: '李星晓',
+				    	label: '李星晓'
+				    },
+				     {
+				     	value: '刁玉朕',
+				     	label: '刁玉朕'
+				     },
+				     {
+				     	value: '任永涛',
+				     	label: '任永涛'
+				     },
+				     {
+				     	value: '武毅',
+				     	label: '武毅'
+				     },
+
 				],
 				ylnamelist: [],
 			}
@@ -991,7 +1024,7 @@
         		copy.data=allData;
         		//					copy.data.shift = copy.data.lotNumber.slice(10, 11);
         		console.log(copy.data.ylData)
-        
+
         	})
         	.catch(function(error) {
         		console.log(error);
@@ -1078,7 +1111,7 @@
 		font-size: 14px;
 		font-weight: 600;
 	}
-	
+
 	.top {
 		margin: 15px 0;
 	}
