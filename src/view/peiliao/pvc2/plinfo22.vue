@@ -91,7 +91,7 @@
 							return h('div', [
 								h('Button', {
 									props: {
-										type: 'primary',
+										type: params.row.outputStartTime != null&&params.row.outputEndTime != null  ? 'error' : params.row.outputStartTime != null&&params.row.outputEndTime == null  ?'success':'primary',
 										size: 'small'
 									},
 									style: {
